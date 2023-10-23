@@ -1,39 +1,57 @@
 public class CountingSort {
     public static void main(String[] args) {
-        int array[]={5,4,3,2,1};
-        Counting_sort(array);
-        for(int i:array){
-            System.out.print(i+" ");
-        }
-    }
-    //this sorting is used when the no of elemnts to sort are smaller in range
-// we make an empty array count which is same size as of the given array
-public static void Counting_sort(int a[]){
-    //there will be a total of two for loops in this code 
-    //one for conting the frequency and storing it in an array
-    //another for sorting the array
-    //the array in which we store the code has the length equal to the max element of the array
-    // loop1: to find the max  element in the array
-    int max= Integer.MIN_VALUE;
-    for(int i:a){
-        max= Math.max(max, i);
-    }
-    //an empty array for frequency of size of amx element is made
-    int b[]= new int[max+1];
-     //loop2: to count frequency  of the element in the array
-        for(int i=0;i<a.length;i++){
-        b[a[i]]++;
-        }
-     
-     //loop 3 for sorting based on array b
-     int j=0;
-     for(int i=0;i<b.length;i++){
-        while(b[i]>0){
-            a[j]=i;
-            j++;
-            b[i]--;
-        }
-     }
-}
-}
+        int[] array = {4, 2, 2, 8, 3, 3, 1};
+        int max = getMaxValue(array);
 
+        System.out.println("Original Array:");
+        printArray(array);
+
+        countingSort(array, max);
+
+        System.out.println("\nSorted Array:");
+        printArray(array);
+    }
+
+    public static void countingSort(int[] arr, int max) {
+        int[] countArray = new int[max + 1];
+        int[] outputArray = new int[arr.length];
+
+        // Count the occurrences of each element
+        for (int value : arr) {
+            countArray[value]++;
+        }
+
+        // Update countArray to store the cumulative count
+        for (int i = 1; i <= max; i++) {
+            countArray[i] += countArray[i - 1];
+        }
+
+        // Build the output array
+        for (int i = arr.length - 1; i >= 0; i--) {
+            outputArray[countArray[arr[i]] - 1] = arr[i];
+            countArray[arr[i]]--;
+        }
+
+        // Copy the sorted elements back to the original array
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = outputArray[i];
+        }
+    }
+
+    public static int getMaxValue(int[] arr) {
+        int max = arr[0];
+        for (int value : arr) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+}
