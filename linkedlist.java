@@ -1,6 +1,4 @@
-import javax.naming.LinkRef;
 
-import org.w3c.dom.Node;
 
 public class linkedlist {
     public static void main(String[] args) {
