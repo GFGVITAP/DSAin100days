@@ -1,92 +1,99 @@
-class Node {
-    int data;
-    Node next;
-
-    public Node(int data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class CircularLinkedList {
+public class CircularLinkedList {
     private Node head;
+    private Node tail;
 
-    public void insert(int data) {
+    public CircularLinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void insertAtBeginning(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
+
+        if (isEmpty()) {
             head = newNode;
-            head.next = head;
+            tail = newNode;
+            newNode.next = newNode;
         } else {
-            Node temp = head;
-            while (temp.next != head) {
-                temp = temp.next;
-            }
-            temp.next = newNode;
             newNode.next = head;
+            head = newNode;
+            tail.next = newNode;
         }
     }
 
-    public void delete(int key) {
-        if (head == null) {
-            System.out.println("List is empty");
-            return;
-        }
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
 
-        Node curr = head, prev = null;
-        // If the node to be deleted is the head node
-        if (head.data == key) {
-            Node temp = head;
-            while (temp.next != head) {
-                temp = temp.next;
-            }
-            if (head == head.next) {
-                head = null;
-            } else {
-                temp.next = head.next;
-                head = head.next;
-            }
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
+            newNode.next = newNode;
         } else {
-            while (curr.next != head && curr.data != key) {
-                prev = curr;
-                curr = curr.next;
-            }
-            if (curr.data == key) {
-                prev.next = curr.next;
-            } else {
-                System.out.println("Element not found in the list");
-            }
+            newNode.next = tail.next;
+            tail.next = newNode;
+            tail = newNode;
         }
     }
 
-    public void display() {
-        if (head == null) {
-            System.out.println("List is empty");
+    public void deleteAtBeginning() {
+        if (isEmpty()) {
             return;
         }
 
-        Node temp = head;
-        do {
-            System.out.print(temp.data + " ");
-            temp = temp.next;
-        } while (temp != head);
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
+            head = head.next;
+            tail.next = head;
+        }
+    }
+
+    public void deleteAtEnd() {
+        if (isEmpty()) {
+            return;
+        }
+
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
+            Node currentNode = head;
+            while (currentNode.next != tail) {
+                currentNode = currentNode.next;
+            }
+
+            tail = currentNode;
+            tail.next = head;
+        }
+    }
+
+    public void printList() {
+        Node currentNode = head;
+
+        while (currentNode != null) {
+            System.out.print(currentNode.data + " ");
+            currentNode = currentNode.next;
+
+            if (currentNode == head) {
+                break;
+            }
+        }
+
         System.out.println();
     }
-}
 
-public class Main {
-    public static void main(String[] args) {
-        CircularLinkedList circularList = new CircularLinkedList();
-        circularList.insert(1);
-        circularList.insert(2);
-        circularList.insert(3);
-        circularList.insert(4);
+    private class Node {
+        private int data;
+        private Node next;
 
-        System.out.println("Circular Linked List:");
-        circularList.display();
-
-        circularList.delete(3);
-
-        System.out.println("Circular Linked List after deleting 3:");
-        circularList.display();
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
     }
 }

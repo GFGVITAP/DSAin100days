@@ -1,0 +1,10 @@
+when you have teo different variable names for a same string
+the both variables act as appointers for the same string object.
+whereas if you use new keyword to initialise  the same string there well be a new object 
+formed Hence this new variable doesnt act as a pointer for the old string  but really 
+points to the newly created string.
+Why strings are immutable?
+this is becoz 
+Any change that u have made for a string actually creates a new string and the
+pointer location is chaned to the new string location
+This arises the need for the new data structure called String Builder.
