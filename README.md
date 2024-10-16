@@ -22,20 +22,6 @@
    * Familiarize yourself with the structured learning path outlined in the `curriculum.md` file.
    * Start with the foundational concepts and gradually progress to more advanced topics.
 
-### Learning Resources
-
-* **DSA Concepts:**
-   * [Link to a comprehensive DSA reference]
-   * [Link to a visual guide to data structures]
-   * [Link to a collection of algorithm animations]
-* **Coding Challenges:**
-   * [Link to a platform for coding challenges (e.g., LeetCode, HackerRank)]
-   * [Link to a curated list of DSA practice problems]
-* **Online Courses:**
-   * [Link to recommended online courses on DSA]
-* **Books:**
-   * [Link to recommended books on DSA]
-
 ### Contributing
 
 We encourage contributions from the community to enhance this repository. Feel free to:
